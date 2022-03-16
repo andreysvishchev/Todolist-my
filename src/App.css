@@ -1,0 +1,16 @@
+.App {
+    padding: 5rem 0 0 5rem;
+    box-sizing: border-box;
+    height: 100vh;
+    width: max-content;
+    min-width: 100%;
+    background-image: url('bg/bg.jpg');
+    background-size: cover;
+    font-family: 'Roboto', sans-serif;
+    display: flex;
+    align-items: flex-start;
+}
+
+
+
+

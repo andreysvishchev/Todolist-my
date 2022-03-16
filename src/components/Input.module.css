@@ -1,0 +1,21 @@
+.input {
+    border: 2px solid #39a6b7;
+    padding: 6px 10px;
+    border-radius: 3px;
+    outline: none;
+    font-size: 16px;
+    color: #4c4c4c;
+    width: 100%;
+}
+.input::placeholder {
+    font-size: 16px;
+    color: #39a6b7;
+}
+
+.input.error {
+    border: 2px solid #ef2e2e;
+}
+
+.input.error.input::placeholder  {
+   color: #ef2e2e;
+}

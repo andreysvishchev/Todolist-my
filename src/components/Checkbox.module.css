@@ -1,0 +1,25 @@
+.checkbox {
+    width: 16px;
+    height: 16px;
+    display: block;
+    background-color: #a7e5ee;
+    margin-right: 5px;
+    border-radius: 3px;
+    cursor: pointer;
+}
+
+.checkbox_input {
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    position: absolute;
+
+}
+
+.checkbox_input:checked + .checkbox {
+    background-color: #39a6b7;
+    background-image: url('../bg/check-on.svg');
+    background-repeat: no-repeat;
+    background-position: center center;
+}
