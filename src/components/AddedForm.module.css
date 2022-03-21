@@ -1,0 +1,46 @@
+.wrap {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.input {
+    border: 2px solid #39a6b7;
+    padding: 10px;
+    border-radius: 4px;
+    outline: none;
+    font-size: 16px;
+    color: #4c4c4c;
+    width: 75%;
+    font-family: Montserrat, sans-serif;
+    font-weight: 500;
+}
+.input::placeholder {
+    font-size: 16px;
+    color: #39a6b7;
+}
+
+.input.error {
+    border: 2px solid #ef2e2e;
+}
+
+.input.error.input::placeholder  {
+    color: #ef2e2e;
+}
+
+.button {
+    border: none;
+    background-color: #39a6b7;
+    border-radius: 4px;
+    color: #fff;
+    font-weight: 600;
+    padding: 0 20px;
+    cursor: pointer;
+    font-size: 0.875rem;
+    line-height: 1.75;
+    box-shadow: rgb(0 0 0 / 20%) 0px 3px 1px -2px, rgb(0 0 0 / 14%) 0px 2px 2px 0px, rgb(0 0 0 / 12%) 0px 1px 5px 0px;
+    transition: box-shadow 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms, border-color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms, color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+}
+.button:hover {
+    box-shadow: 0px 2px 8px 3px #cac6c6;box-shadow: rgb(0 0 0 / 20%) 0px 2px 4px -1px, rgb(0 0 0 / 14%) 0px 4px 5px 0px, rgb(0 0 0 / 12%) 0px 1px 10px 0px;
+}

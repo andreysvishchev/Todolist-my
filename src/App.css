@@ -6,7 +6,6 @@
     min-width: 100%;
     background-image: url('bg/bg.jpg');
     background-size: cover;
-    font-family: 'Roboto', sans-serif;
     display: flex;
     align-items: flex-start;
 }

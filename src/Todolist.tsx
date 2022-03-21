@@ -1,48 +1,46 @@
 import React, {useState} from "react";
-import {AddButton} from "./components/AddButton";
-import {Input} from "./components/Input";
 import style from "./Todolist.module.css";
-import {state, StateType} from "./state/state";
-import {v1} from "uuid";
 import {Checkbox} from "./components/Checkbox";
+import {TaskType} from "./App";
+import {AddedForm} from "./components/AddedForm";
+import {EditableSpan} from "./components/EditableSpan";
 
 
 type TodolistType = {
-    state: StateType[]
+
+
+    todolistID: string
     title: string
+    task: TaskType[]
+    addTask: (todolistID: string, value: string) => void
+    changeTitle: (todolistID: string, title: string) => void
+    changeTask: (todolistID: string, taskID: string, title: string,) => void
 }
 
 type FilterType = 'All' | 'Completed' | 'Uncompleted'
 
-export type ErrorType = string | null
 
 export const Todolist = (props: TodolistType) => {
 
-    let [value, setValue] = useState('')
-    let [tasks, setTasks] = useState<StateType[]>(state)
     let [filter, setFilter] = useState<FilterType>('All')
-    let [error, setError] = useState<ErrorType>(null)
 
-    function addTask(value: string) {
-        let NewTask = {id: v1(), title: value, completed: false}
-        if (value.trim() !== '') {
-            setTasks([NewTask, ...tasks])
-        } else {
-            setError('Field is required!')
-        }
-        setValue('')
-    }
 
-    let filtredTasks = tasks
+    let filtredTasks = props.task
     if (filter === 'Completed') {
-        filtredTasks = tasks.filter(t => t.completed)
+        filtredTasks = props.task.filter(t => t.completed)
     }
     if (filter === 'Uncompleted') {
-        filtredTasks = tasks.filter(t => !t.completed)
+        filtredTasks = props.task.filter(t => !t.completed)
     }
 
+
+    const addTaskForTodolist = (value: string) => {
+        props.addTask(props.todolistID, value)
+    }
+
+
     const onClickHandler = (tID: string) => {
-        setTasks(tasks.filter(el => el.id !== tID))
+        /*        setTasks(tasks.filter(el => el.id !== tID))*/
     }
     const onClickHandlerAll = (value: FilterType) => {
         setFilter(value)
@@ -54,24 +52,33 @@ export const Todolist = (props: TodolistType) => {
         setFilter(value)
     }
     const changeStatus = (tID: string, checked: boolean) => {
-        setTasks(tasks.map(el => el.id === tID ? {...el, completed: !checked} : el))
+        /*        setTasks(tasks.map(el => el.id === tID ? {...el, completed: !checked} : el))*/
     }
+
+
+    const changeTodolistTitle = (title: string) => {
+        props.changeTitle(props.todolistID, title)
+    }
+    const changeTaskTitle = (taskID: string, title: string) => {
+        props.changeTask(props.todolistID, taskID, title)
+    }
+
 
     return (
         <div className={style.wrap}>
-            <h2 className={style.title}>{props.title}</h2>
+            <EditableSpan title={props.title} changeTitle={changeTodolistTitle}/>
             <div className={style.input_wrap}>
-                <Input value={value} setValue={setValue} addTask={addTask} error={error} setError={setError}/>
-                <AddButton name={'ADD'} addTask={addTask} value={value}/>
+                <AddedForm addTitle={addTaskForTodolist}/>
             </div>
-            {error && <div className={style.error}>{error}</div>}
+
             <ul className={style.list}>
-                {filtredTasks.map((el, i) => {
+                {filtredTasks.map((el) => {
                         return (
-                            <li className={style.task} key={i} id={el.id}>
+                            <li className={style.task}
+                                key={el.id}
+                                id={el.id}>
                                 <Checkbox checked={el.completed} callBack={() => changeStatus(el.id, el.completed)}/>
-                                <span
-                                    className={el.completed ? style.task_title + ' ' + style.completed : style.task_title}>{el.title}</span>
+                                <EditableSpan title={el.title} changeTitle={(title) => changeTaskTitle(el.id, title)}/>
                                 <button className={style.task_delete} onClick={() => onClickHandler(el.id)}>X</button>
                             </li>
                         )
